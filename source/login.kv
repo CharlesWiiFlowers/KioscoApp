@@ -1,0 +1,39 @@
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20, 50]
+        spacing: 20
+
+        Label:
+            text: 'Kiosco App'
+            font_size: 32
+            size_hint_y: None
+            height: 100
+
+        TextInput:
+            id: username
+            hint_text: 'Nombre de usuario'
+            multiline: False
+            size_hint_y: None
+            height: 40
+
+        TextInput:
+            id: password
+            hint_text: 'Contraseña'
+            password: True
+            multiline: False
+            size_hint_y: None
+            height: 40
+
+        Button:
+            text: 'Iniciar sesión'
+            size_hint_y: None
+            height: 50
+            on_press: root.login(username.text, password.text)
+
+        Label:
+            id: login_status
+            text: ''
+            color: (1, 0, 0, 1)
+            size_hint_y: None
+            height: 40
