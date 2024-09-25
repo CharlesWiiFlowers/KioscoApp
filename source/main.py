@@ -1,26 +1,17 @@
-from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.core.window import Window
+from kivymd.uix.screen import MDScreen
 
-Builder.load_file('login.kv')
-
-# Simulamos una pantalla de inicio de sesión
-class LoginScreen(Screen):
+class LoginScreen(MDScreen):
     def login(self, username, password):
-        # Aquí podrías agregar la lógica de autenticación real
-        if username == "doctor" and password == "12345":
-            self.ids.login_status.text = "Inicio de sesión exitoso"
-        else:
-            self.ids.login_status.text = "Nombre de usuario o contraseña incorrectos"
+        print(f"Usuario: {username}, Contraseña: {password}")
 
-class KioscoApp(App):
+class KioscoApp(MDApp):
     def build(self):
-        sm = ScreenManager()
-        sm.add_widget(LoginScreen(name='login'))
-        #Window.clearcolor = (1, 1, 1, 1)  # Color de fondo blanco
-        return sm
+        return Builder.load_file('login.kv')
+
+    def login(self, username, password):
+        print(f"Usuario: {username}, Contraseña: {password}")
 
 if __name__ == '__main__':
     KioscoApp().run()
