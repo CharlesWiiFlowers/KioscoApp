@@ -1,0 +1,94 @@
+MDFloatLayout:
+    md_bg_color: 0/255, 53/255, 102/255, 1  # Fondo azul oscuro
+    MDLabel:
+        text: "[b]INICIAR SESIÓN[/b]"
+        halign: "center"
+        font_style: "Display"
+        role: "medium"
+        pos_hint: {"center_x": 0.5, "center_y": 0.8}
+        text_color: 1, 1, 1, 1  # Texto blanco
+        markup: True
+        font_size: "57sp"
+    MDLabel:
+        text: "Kiosco App"
+        halign: "center"
+        font_style: "Display"
+        role: "small"
+        pos_hint: {"center_x": 0.5, "center_y": 0.7}
+        text_color: 1, 1, 1, 1  # Texto blanco
+        markup: True
+
+    #MDIcon:
+        #icon: "account-cowboy-hat-outline"
+        #halign: "center"
+        #pos_hint: {"center_x": 0.5, "center_y": 0.7}
+
+    MDTextField:
+        id: username
+        mode: "filled"
+        multiline: False
+
+        size_hint_x: 0.8
+        pos_hint: {"center_x": 0.5, "top": 0.65}
+
+        text_color: (1,1,1,1)
+        line_color_normal: (1,1,1,1)
+        line_color_focus: (1,1,0,1)
+
+        MDTextFieldHintText:
+            text: "DUI/Teléfono/Correo"
+
+        MDTextFieldLeadingIcon:
+            icon: "account"
+
+    MDTextField:
+        id: password
+        mode: "filled"
+        multiline: False
+        password: True
+
+        size_hint_x: 0.8
+        pos_hint: {"center_x": 0.5, "top": 0.55}
+
+        text_color: (1,1,1,1)
+        line_color_normal: (1,1,1,1)
+        line_color_focus: (1,1,0,1)
+
+        MDTextFieldHintText:
+            text: "Contraseña"
+
+        MDTextFieldLeadingIcon:
+            icon: "lock"
+
+    MDButton:
+        style: "elevated"
+        on_release: app.login(username.text, password.text)
+        
+        pos_hint: {"center_x": 0.5, "top": 0.40}
+        size_hint_x: 0.8
+
+        MDButtonText:
+            text: "Iniciar sesión"
+
+        MDButtonIcon
+            icon: "connection"
+
+    MDLabel:
+        text: "[u][ref=forgot]¿Olvidaste tu contraseña? Click Aquí[/ref][/u]"
+        halign: "center"
+        font_style: "Title"
+        role: "medium"
+        pos_hint: {"center_x": 0.5, "top": 0.70}
+        color: 1 , 1 , 1 , 1
+        markup: True
+        on_ref_press: app.login(username.text, password.text)
+
+    MDLabel:
+        text: "[u][ref=reg]¿No tienes una cuenta? Crea una aquí[/ref][/u]"
+        halign: "center"
+        font_style: "Title"
+        role: "medium"
+        pos_hint: {"center_x": 0.5, "top": 0.75}
+        color: 1, 1, 1, 1
+        markup: True
+        on_ref_press: app.login(username.text, password.text)
