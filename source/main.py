@@ -15,6 +15,11 @@ class KioscoApp(MDApp):
 
     def work(self):
         print("Yes, this work")
+        self.nextSlide()
+
+    def nextSlide(self):
+        self.root.clear_widgets()
+        self.root.add_widget(Builder.load_file('login.kv'))
 
 if __name__ == '__main__':
     KioscoApp().run()
