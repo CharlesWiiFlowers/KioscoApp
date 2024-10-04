@@ -1,2 +1,7 @@
 #PYthon
 env/*
+
+# Buildozer
+bin
+buildozer
+.buildozer
