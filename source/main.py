@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.screen import MDScreen
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 class LoginScreen(MDScreen):
     def login(self, username, password):
@@ -12,14 +13,16 @@ class KioscoApp(MDApp):
 
     def login(self, username, password):
         print(f"Usuario: {username}, Contraseña: {password}")
+        self.nextSlide('register_doctor')
 
     def work(self):
         print("Yes, this work")
-        self.nextSlide()
 
-    def nextSlide(self):
+    def nextSlide(self, screen:str):
+        """Change to your screen"""
         self.root.clear_widgets()
-        self.root.add_widget(Builder.load_file('login.kv'))
+        otherScreen = Builder.load_file(f'{screen}.kv')
+        self.root.add_widget(otherScreen)
 
 if __name__ == '__main__':
     KioscoApp().run()
