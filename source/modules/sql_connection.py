@@ -20,7 +20,7 @@ class Sql():
         column_list = ("phone", "email", "dui")
 
         for key in column_list:
-            Sql.cursor.execute(f"SELECT ID FROM user WHERE {key} = {username} AND password = {password}")
+            Sql.cursor.execute(f"SELECT ID FROM user WHERE {key} = %(username)s AND password = %(password)d", {'username': username, 'password': password})
             result = Sql.cursor.fetchone()
 
         if result is not None:
