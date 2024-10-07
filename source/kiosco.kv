@@ -1,0 +1,456 @@
+<LoginScreen>:
+    MDFloatLayout:
+        md_bg_color: 0/255, 53/255, 102/255, 1  # Fondo azul oscuro
+        MDLabel:
+            text: "[b]INICIAR SESIÓN[/b]"
+            halign: "center"
+            font_style: "Display"
+            role: "medium"
+            pos_hint: {"center_x": 0.5, "center_y": 0.8}
+            text_color: 1, 1, 1, 1  # Texto blanco
+            markup: True
+            font_size: "57sp"
+        MDLabel:
+            text: "Kiosco App"
+            halign: "center"
+            font_style: "Display"
+            role: "small"
+            pos_hint: {"center_x": 0.5, "center_y": 0.7}
+            text_color: 1, 1, 1, 1  # Texto blanco
+            markup: True
+
+        #MDIcon:
+            #icon: "account-cowboy-hat-outline"
+            #halign: "center"
+            #pos_hint: {"center_x": 0.5, "center_y": 0.7}
+
+        MDTextField:
+            id: username
+            mode: "filled"
+            multiline: False
+
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "top": 0.65}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+            line_color_focus: (1,1,0,1)
+
+            MDTextFieldHintText:
+                text: "DUI/Teléfono/Correo"
+
+            MDTextFieldLeadingIcon:
+                icon: "account"
+
+        MDTextField:
+            id: password
+            mode: "filled"
+            multiline: False
+            password: True
+
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "top": 0.55}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+            line_color_focus: (1,1,0,1)
+
+            MDTextFieldHintText:
+                text: "Contraseña"
+
+            MDTextFieldLeadingIcon:
+                icon: "lock"
+
+        MDButton:
+            style: "elevated"
+            on_release: app.login(username.text, password.text)
+            
+            pos_hint: {"center_x": 0.5, "top": 0.40}
+            size_hint_x: 0.8
+
+            MDButtonText:
+                text: "Iniciar sesión"
+
+            MDButtonIcon
+                icon: "connection"
+
+        MDLabel:
+            text: "[u][ref=forgot]¿Olvidaste tu contraseña? Click Aquí[/ref][/u]"
+            halign: "center"
+            font_style: "Title"
+            role: "medium"
+            pos_hint: {"center_x": 0.5, "top": 0.70}
+            color: 1 , 1 , 1 , 1
+            markup: True
+            on_ref_press: app.login(username.text, password.text)
+
+        MDLabel:
+            text: "[u][ref=reg]¿No tienes una cuenta? Crea una aquí[/ref][/u]"
+            halign: "center"
+            font_style: "Title"
+            role: "medium"
+            pos_hint: {"center_x": 0.5, "top": 0.75}
+            color: 1, 1, 1, 1
+            markup: True
+            on_ref_press: root.manager.current = 'SwitchRegisterScreen'
+
+<SwitchRegisterScreen>:
+    MDFloatLayout:
+        md_bg_color: 1,1,1,1
+
+        MDButton:
+            style: "elevated"
+            on_release: root.manager.current = 'RegisterDoctorScreen'
+            
+            pos_hint: {"center_x": 0.5, "top": 0.20}
+            size_hint_x: 0.8
+
+            MDButtonText:
+                text: "Registrarse como Doctor"
+
+            MDButtonIcon:
+                icon: "connection"
+
+        MDButton:
+            style: "elevated"
+            on_release: root.manager.current = 'RegisterUserScreen'
+            
+            pos_hint: {"center_x": 0.5, "top": 0.40}
+            size_hint_x: 0.8
+
+            MDButtonText:
+                text: "Registrarse como Usuario"
+
+            MDButtonIcon:
+                icon: "connection"
+
+
+<RegisterDoctorScreen>:
+    MDFloatLayout:
+        md_bg_color: 29/255, 53/255, 87/255, 1
+
+        MDLabel:
+            text: "[b]¡Registrarse como doctor![/b]"
+            halign: "center"
+            font_style: "Headline"
+            role: "medium"
+            text_color: (1,1,1,1)
+            markup: True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+
+        MDTextField:
+            id: dui
+            mode: "filled"
+            multiline: False
+            isnumeric: True
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "DUI"
+
+            MDTextFieldLeadingIcon:
+                icon: "account-cowboy-hat-outline"
+
+        MDTextField:
+            id: phone
+            mode: "filled"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Número de teléfono"
+
+            MDTextFieldLeadingIcon:
+                icon: "phone"
+
+        MDTextField:
+            id: email
+            mode: "filled"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Correo electrónico"
+
+            MDTextFieldLeadingIcon:
+                icon: "email"
+
+        MDTextField:
+            id: name
+            mode: "filled"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Nombre completo"
+
+            MDTextFieldLeadingIcon:
+                icon: "rename"
+
+        MDTextField:
+            id: vigilance
+            mode: "filled"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Número de la junta de vigilancia"
+
+            MDTextFieldLeadingIcon:
+                icon: "account-box-multiple"
+
+        MDTextField:
+            id: password
+            mode: "filled"
+            multiline: False
+            password: True
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Contraseña"
+
+            MDTextFieldLeadingIcon:
+                icon: "lock"
+
+        MDTextField:
+            id: password_repeat
+            mode: "filled"
+            multiline: False
+            password: True
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+
+            text_color: (1,1,1,1)
+            line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Repetir contraseña"
+
+            MDTextFieldLeadingIcon:
+                icon: "lock-reset"
+
+            MDTextFieldHelperText:
+                text: "La contraseña debe ser la misma."
+                mode: "on_error"
+
+        MDButton:
+            style: "elevated"
+            on_release: app.work()
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.09}
+
+            MDButtonText:
+                text: "Registrarme"
+
+            MDButtonIcon:
+                icon: "account-plus"
+
+<RegisterUserScreen>:
+    MDFloatLayout:
+        #md_bg_color: 29/255, 53/255, 87/255, 1
+        md_bg_color: 1,1,1,1
+
+        MDLabel:
+            text: "[b]¡Registrarse como usuario![/b]"
+            halign: "center"
+            font_style: "Headline"
+            role: "medium"
+            #text_color: (0,0,0,1)
+            markup: True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+
+        MDTextField:
+            id: name
+            mode: "outlined"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+
+            #text_color: (1,1,1,1)
+            #line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Nombre completo"
+
+            MDTextFieldLeadingIcon:
+                icon: "rename"
+
+        MDTextField:
+            id: dui
+            mode: "outlined"
+            multiline: False
+            isnumeric: True
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+
+            #text_color: (1,1,1,1)
+            #line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "DUI"
+
+            MDTextFieldLeadingIcon:
+                icon: "account-cowboy-hat-outline"
+
+        MDTextField:
+            id: phone
+            mode: "outlined"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+
+            #text_color: (1,1,1,1)
+            #line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Número de teléfono"
+
+            MDTextFieldLeadingIcon:
+                icon: "phone"
+
+        MDTextField:
+            id: email
+            mode: "outlined"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+
+            #text_color: (1,1,1,1)
+            #line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Correo electrónico"
+
+            MDTextFieldLeadingIcon:
+                icon: "email"
+
+        MDTextField:
+            id: address
+            mode: "outlined"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+
+            #text_color: (1,1,1,1)
+            #line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Dirección de vivienda"
+
+            MDTextFieldLeadingIcon:
+                icon: "account-box-multiple"
+
+        #MDButton:
+            #style: "elevated"
+        
+        MDTextField:
+            id: borndate
+            mode: "outlined"
+            multiline: False
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+
+            #text_color: (1,1,1,1)
+            #line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Fecha de nacimiento (DD-MM-YYYY)"
+
+            MDTextFieldLeadingIcon:
+                icon: "account-box-multiple"
+
+            MDTextFieldMaxLengthText:
+                max_text_length: 10
+
+
+        MDTextField:
+            id: password
+            mode: "outlined"
+            multiline: False
+            password: True
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+
+            #text_color: (1,1,1,1)
+            #line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Contraseña"
+
+            MDTextFieldLeadingIcon:
+                icon: "lock"
+
+        MDTextField:
+            id: password_repeat
+            mode: "outlined"
+            multiline: False
+            password: True
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+
+            #text_color: (1,1,1,1)
+            #line_color_normal: (1,1,1,1)
+
+            MDTextFieldHintText:
+                text: "Repetir contraseña"
+
+            MDTextFieldLeadingIcon:
+                icon: "lock-reset"
+
+            MDTextFieldHelperText:
+                text: "La contraseña debe ser la misma."
+                mode: "on_error"
+
+        MDButton:
+            style: "elevated"
+            on_release: app.work()
+
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+
+            MDButtonText:
+                text: "Registrarme"
+
+            MDButtonIcon:
+                icon: "account-plus"
+
