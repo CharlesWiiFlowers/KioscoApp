@@ -1,23 +1,23 @@
 import pymysql
 from pymysql import Error
 import os
-from modules.exception import LoginError, EmptyField
+from modules.exception import LoginError, EmptyFieldError, PasswordIsNotEqualError
 from dotenv import load_dotenv
 
 class VarSql():
     def __init__(self):
         load_dotenv()
-        self.__connection = pymysql.connect(
+        self._connection = pymysql.connect(
             host="localhost",
             user=os.getenv('USER_DB'),
             password=os.getenv('PASSWORD_DB'),
             database="kiosco"
         )
-        self._cursor = self.__connection.cursor()
+        self._cursor = self._connection.cursor()
 
     def close_connection(self):
         try:
-            self.__connection.close()
+            self._connection.close()
         except Error:
             print("Connection is already closed")
 
@@ -30,7 +30,7 @@ class Sql(VarSql):
         """Verificar las credenciales del usuario"""
 
         if username == '' or password == '' or username is None or password is None:
-            raise EmptyField("Please fill all of fields")
+            raise EmptyFieldError("Please fill all of fields")
 
         result: tuple
         column_list = ("phone", "email", "dui")
@@ -46,10 +46,14 @@ class Sql(VarSql):
 
         # If this don't find the user
         self.close_connection()
-        raise LoginError("Invalid credentials for username field")
+        raise LoginError("Invalid credentials for username field.")
 
-    def register_user(self, dui: str, phone: int, email: str, address: str, fullname: str, password: str, borndate: str):
+    def register_user(self, dui: str, phone: int, email: str, address: str, fullname: str, password: str, password_repeat:str, borndate: str):
         """Register a new user"""
+
+        if password != password_repeat:
+            raise PasswordIsNotEqualError("The password must be the same.")
+
         user: dict = {
             "dui": dui, 
             "phone": phone, 
@@ -62,7 +66,7 @@ class Sql(VarSql):
 
         for key, value in user.items():
             if value == "" or value is None:
-                raise EmptyField(f"Please fill {key}")
+                raise EmptyFieldError(f"Please fill {key}")
 
         sql = """
         INSERT INTO user (dui, phone, email, address, fullname, password, borndate) 
@@ -70,6 +74,6 @@ class Sql(VarSql):
         """
         
         self._cursor.execute(sql, user)
-        self.__connection.commit()
+        self._connection.commit()
 
         self.close_connection()
