@@ -3,28 +3,29 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from modules.sql_connection import Sql
 from modules.exception import LoginError
-from modules.exception import EmptyField
+from modules.exception import EmptyFieldError
+from modules.exception import PasswordIsNotEqualError
 
 class LoginScreen(Screen):
-    def login(self, username, password):
-        print(f"Usuario: {username}, Contraseña: {password}")
-
-    def work(self):
-        print("wtf this work?")
+    pass
 
 class SwitchRegisterScreen(Screen):
     pass
 
 class RegisterDoctorScreen(Screen):
-    def work(self):
-        print("OMG THIS WORK!")
+    pass
 
 class RegisterUserScreen(Screen):
     pass
 
 class KioscoApp(MDApp):
+
+    # Build the class
+    sql = Sql()
+
     def build(self):
-        self.theme_cls.primary_palette = "Olive"
+        self.theme_cls.theme_style = "Light"
+        self.theme_cls.primary_palette = "Blue"
 
         sm = ScreenManager()
         sm.add_widget(LoginScreen(name='LoginScreen'))
@@ -41,11 +42,18 @@ class KioscoApp(MDApp):
 
     def login(self, username, password):
         try:
-            print(Sql.login(username, password))
+            print(self.sql.login(username=username, password=password))
         except LoginError:
             print("Oh no!")
-        except EmptyField:
+        except EmptyFieldError:
             print("Fill field")
+
+    def register_user(self, dui:str, name:str, phone:int, email:str, address:str, borndate:str, password:str, password_repeat:str):
+        try: self.sql.register_user(dui,phone,email,address,name,password,password_repeat,borndate)
+        except EmptyFieldError:
+            print("Fill fields!")
+        except PasswordIsNotEqualError:
+            print("Password must be the same!")
 
     def work(self):
         print("Yes, this work")

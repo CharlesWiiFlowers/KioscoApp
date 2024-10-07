@@ -82,7 +82,7 @@
             pos_hint: {"center_x": 0.5, "top": 0.70}
             color: 1 , 1 , 1 , 1
             markup: True
-            on_ref_press: app.login(username.text, password.text)
+            on_ref_press: root.manager.login(username.text, password.text)
 
         MDLabel:
             text: "[u][ref=reg]¿No tienes una cuenta? Crea una aquí[/ref][/u]"
@@ -443,7 +443,7 @@
 
         MDButton:
             style: "elevated"
-            on_release: app.work()
+            on_release: app.register_user(dui=dui.text, name=name.text, phone=phone.text,email=email.text, address=address.text,borndate=borndate.text,password=password.text,password_repeat=password_repeat.text)
 
             size_hint_x: 0.9
             pos_hint: {'center_x': 0.5, 'center_y': 0.05}
