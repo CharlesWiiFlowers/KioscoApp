@@ -12,9 +12,15 @@ class LoginScreen(Screen):
     def work(self):
         print("wtf this work?")
 
+class SwitchRegisterScreen(Screen):
+    pass
+
 class RegisterDoctorScreen(Screen):
     def work(self):
         print("OMG THIS WORK!")
+
+class RegisterUserScreen(Screen):
+    pass
 
 class KioscoApp(MDApp):
     def build(self):
@@ -22,7 +28,9 @@ class KioscoApp(MDApp):
 
         sm = ScreenManager()
         sm.add_widget(LoginScreen(name='LoginScreen'))
+        sm.add_widget(SwitchRegisterScreen(name='SwitchRegisterScreen'))
         sm.add_widget(RegisterDoctorScreen(name='RegisterDoctorScreen'))
+        sm.add_widget(RegisterUserScreen(name='RegisterUserScreen'))
 
         sm.current = 'LoginScreen'
 
