@@ -92,7 +92,38 @@
             pos_hint: {"center_x": 0.5, "top": 0.75}
             color: 1, 1, 1, 1
             markup: True
-            on_ref_press: root.manager.current = 'RegisterDoctorScreen'
+            on_ref_press: root.manager.current = 'SwitchRegisterScreen'
+
+<SwitchRegisterScreen>:
+    MDFloatLayout:
+        md_bg_color: 1,1,1,1
+
+        MDButton:
+            style: "elevated"
+            on_release: root.manager.current = 'RegisterDoctorScreen'
+            
+            pos_hint: {"center_x": 0.5, "top": 0.20}
+            size_hint_x: 0.8
+
+            MDButtonText:
+                text: "Registrarse como Doctor"
+
+            MDButtonIcon:
+                icon: "connection"
+
+        MDButton:
+            style: "elevated"
+            on_release: root.manager.current = 'RegisterUserScreen'
+            
+            pos_hint: {"center_x": 0.5, "top": 0.40}
+            size_hint_x: 0.8
+
+            MDButtonText:
+                text: "Registrarse como Usuario"
+
+            MDButtonIcon:
+                icon: "connection"
+
 
 <RegisterDoctorScreen>:
     MDFloatLayout:
