@@ -63,7 +63,9 @@
 
         MDButton:
             style: "elevated"
-            on_release: app.login(username.text, password.text)
+            on_release:
+                root.manager.transition.direction = 'left'
+                app.login(username.text, password.text)
             
             pos_hint: {"center_x": 0.5, "top": 0.40}
             size_hint_x: 0.8
@@ -82,7 +84,9 @@
             pos_hint: {"center_x": 0.5, "top": 0.70}
             color: 1 , 1 , 1 , 1
             markup: True
-            on_ref_press: root.manager.login(username.text, password.text)
+            on_ref_press:
+                root.manager.transition.direction = 'left'
+                root.manager.login(username.text, password.text)
 
         MDLabel:
             text: "[u][ref=reg]¿No tienes una cuenta? Crea una aquí[/ref][/u]"
@@ -92,7 +96,9 @@
             pos_hint: {"center_x": 0.5, "top": 0.75}
             color: 1, 1, 1, 1
             markup: True
-            on_ref_press: root.manager.current = 'SwitchRegisterScreen'
+            on_ref_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'SwitchRegisterScreen'
 
 <SwitchRegisterScreen>:
     MDFloatLayout:
@@ -100,7 +106,9 @@
 
         MDButton:
             style: "elevated"
-            on_release: root.manager.current = 'RegisterDoctorScreen'
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'RegisterDoctorScreen'
             
             pos_hint: {"center_x": 0.5, "top": 0.20}
             size_hint_x: 0.8
@@ -113,7 +121,9 @@
 
         MDButton:
             style: "elevated"
-            on_release: root.manager.current = 'RegisterUserScreen'
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'RegisterUserScreen'
             
             pos_hint: {"center_x": 0.5, "top": 0.40}
             size_hint_x: 0.8
@@ -124,7 +134,13 @@
             MDButtonIcon:
                 icon: "connection"
 
-
+        MDFabButton:
+            icon: "arrow-left-circle"
+            style: "standard"
+            pos_hint: {'center_x': 0.9, 'center_y': 0.05}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.current = root.manager.previous()
 <RegisterDoctorScreen>:
     MDFloatLayout:
         md_bg_color: 29/255, 53/255, 87/255, 1
@@ -276,7 +292,14 @@
 
             MDButtonIcon:
                 icon: "account-plus"
-
+    
+        MDFabButton:
+            icon: "arrow-left-circle"
+            style: "standard"
+            pos_hint: {'center_x': 0.9, 'center_y': 0.05}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.current = root.manager.previous()
 <RegisterUserScreen>:
     MDFloatLayout:
         #md_bg_color: 29/255, 53/255, 87/255, 1
@@ -454,3 +477,10 @@
             MDButtonIcon:
                 icon: "account-plus"
 
+        MDFabButton:
+            icon: "arrow-left-circle"
+            style: "standard"
+            pos_hint: {'center_x': 0.9, 'center_y': 0.05}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.current = "SwitchRegisterScreen"
