@@ -1,11 +1,12 @@
-#Python
+# 🐍 - Python - 🐍
 env/*
 __pycache__
 
-# Buildozer
+# 💡- Buildozer - 💡
 bin
 buildozer
 .buildozer
 
-# General
+# 🐳 - General - 🐳
 .env
+.vscode
