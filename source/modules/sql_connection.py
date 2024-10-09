@@ -34,9 +34,10 @@ class Sql(VarSql):
 
         result: tuple
         column_list = ("phone", "email", "dui")
+        column_dict = {"user": "phone", "user": "email", "user": "dui", "doctor": "phone", "doctor": "email", "doctor": "dui"}
 
-        for key in column_list:
-            self._cursor.execute(f"SELECT ID FROM user WHERE {key} = %(username)s AND password = %(password)s", {'username': username, 'password': password})
+        for key, value in column_dict.items():
+            self._cursor.execute(f"SELECT ID FROM {key} WHERE {value} = %(username)s AND password = %(password)s", {'username': username, 'password': password})
             result = self._cursor.fetchone()
 
             # If this find the user
