@@ -1,8 +1,6 @@
 # 🚀 KioscoApp
 
-## ¡Welcome!
-
-### 🌟 KioscoApp - Medical Assistance for Rural Areas 🏥🌿
+## 🌟 KioscoApp - Medical Assistance for Rural Areas 🏥🌿
 
 **Project for a Science Fair**
 
@@ -18,7 +16,7 @@ We will install small **kiosks** (medicine dispensing machines, similar to bank 
 
 ---
 
-### 🌟 KioscoApp - Asistencia Médica para Áreas Rurales 🏥🌿
+## 🌟 KioscoApp - Asistencia Médica para Áreas Rurales 🏥🌿
 
 **Proyecto para una Feria de Ciencias**
 
@@ -31,7 +29,3 @@ Instalaremos pequeños **kioscos** (máquinas dispensadoras de medicamentos, sim
 - 💊 Dispensación de medicamentos a través de kioscos según recetas.
 - 📲 Sistema de código/QR para la recogida segura de medicamentos.
 - 🤝 Dirigido a mejorar el acceso a la salud en comunidades desatendidas.
-
----
-
-Espero que te guste cómo quedó 😊
