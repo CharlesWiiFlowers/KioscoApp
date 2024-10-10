@@ -282,7 +282,7 @@
 
         MDButton:
             style: "elevated"
-            on_release: app.work()
+            on_release: app.register_doctor(dui.text, phone.text, email.text, name.text, vigilance.text, password.text, password_repeat.text)
 
             size_hint_x: 0.9
             pos_hint: {'center_x': 0.5, 'center_y': 0.09}
