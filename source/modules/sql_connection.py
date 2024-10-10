@@ -33,7 +33,6 @@ class Sql(VarSql):
             raise EmptyFieldError("Please fill all of fields")
 
         result: tuple
-        column_list = ("phone", "email", "dui")
         column_dict = {"user": "phone", "user": "email", "user": "dui", "doctor": "phone", "doctor": "email", "doctor": "dui"}
 
         for key, value in column_dict.items():
@@ -74,6 +73,35 @@ class Sql(VarSql):
         VALUES (%(dui)s, %(phone)s, %(email)s, %(address)s, %(fullname)s, %(password)s, %(borndate)s)
         """
         
+        self._cursor.execute(sql, user)
+        self._connection.commit()
+
+        self.close_connection()
+
+    def register_doctor(self, dui:str, phone:int, email:str, fullname:str, vigilance:str, password:str, password_repeat:str):
+        """Register a new Doctor"""
+
+        if password != password_repeat:
+            raise PasswordIsNotEqualError("The password must be the same.")
+        
+        user:dict = {
+            "dui": dui,
+            "phone": phone,
+            "email": email,
+            "fullname": fullname,
+            "vigilance": vigilance,
+            "password": password
+        }
+
+        for key, value in user.items():
+            if value == "" or value is None:
+                raise EmptyFieldError(f"Please fill {key}")
+            
+        sql = """
+        INSERT INTO user (dui, phone, email, fullname, vigilance, password) 
+        VALUES (%(dui)s, %(phone)s, %(email)s, %(fullname)s, %(vigilance)s, %(password)s)
+        """
+
         self._cursor.execute(sql, user)
         self._connection.commit()
 
