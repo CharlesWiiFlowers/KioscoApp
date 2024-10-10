@@ -33,13 +33,21 @@ class Sql(VarSql):
             raise EmptyFieldError("Please fill all of fields")
 
         result: tuple
-        column_dict = {"user": "phone", "user": "email", "user": "dui", "doctor": "phone", "doctor": "email", "doctor": "dui"}
+        column_list:tuple = ("phone", "email", "dui")
 
-        for key, value in column_dict.items():
-            self._cursor.execute(f"SELECT ID FROM {key} WHERE {value} = %(username)s AND password = %(password)s", {'username': username, 'password': password})
+        for value in column_list:
+            self._cursor.execute(f"SELECT ID FROM user WHERE {value} = %(username)s AND password = %(password)s", {'username': username, 'password': password})
             result = self._cursor.fetchone()
 
             # If this find the user
+            if result is not None:
+                self.close_connection()
+                return result[0]
+            
+        for value in column_list:
+            self._cursor.execute(f"SELECT ID FROM doctor WHERE {value} = %(username)s AND password = %(password)s", {'username': username, 'password': password})
+            result = self._cursor.fetchone()
+
             if result is not None:
                 self.close_connection()
                 return result[0]
@@ -98,7 +106,7 @@ class Sql(VarSql):
                 raise EmptyFieldError(f"Please fill {key}")
             
         sql = """
-        INSERT INTO user (dui, phone, email, fullname, vigilance, password) 
+        INSERT INTO doctor (dui, phone, email, fullname, vigilance, password) 
         VALUES (%(dui)s, %(phone)s, %(email)s, %(fullname)s, %(vigilance)s, %(password)s)
         """
 
