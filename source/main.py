@@ -55,6 +55,13 @@ class KioscoApp(MDApp):
         except PasswordIsNotEqualError:
             print("Password must be the same!")
 
+    def register_doctor(self, dui:str, phone:int, email:str, fullname:str, vigilance:str, password:str, password_repeat:str):
+        try: self.sql.register_doctor(dui,phone, email, fullname, vigilance, password, password_repeat)
+        except EmptyFieldError:
+            print("Fill fields!")
+        except PasswordIsNotEqualError:
+            print("Passowrd have to be the same!")
+
     def work(self):
         print("Yes, this work")
 
