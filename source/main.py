@@ -18,6 +18,9 @@ class RegisterDoctorScreen(Screen):
 class RegisterUserScreen(Screen):
     pass
 
+class MainUserScreen(Screen):
+    pass
+
 class KioscoApp(MDApp):
 
     # Build the class
@@ -32,6 +35,7 @@ class KioscoApp(MDApp):
         sm.add_widget(SwitchRegisterScreen(name='SwitchRegisterScreen'))
         sm.add_widget(RegisterDoctorScreen(name='RegisterDoctorScreen'))
         sm.add_widget(RegisterUserScreen(name='RegisterUserScreen'))
+        sm.add_widget(MainUserScreen(name='MainUserScreen'))
 
         sm.current = 'LoginScreen'
 
@@ -42,7 +46,13 @@ class KioscoApp(MDApp):
 
     def login(self, username, password):
         try:
-            print(self.sql.login(username=username, password=password))
+            user:tuple = self.sql.login(username=username, password=password)
+
+            if user[1] == True:
+                self.change_screen('MainUserScreen')
+            else:
+                self.change_screen('MainUserScreen') # TODO: change this to MainDoctorScreen
+            
         except LoginError:
             print("Oh no!")
         except EmptyFieldError:
