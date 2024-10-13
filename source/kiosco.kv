@@ -303,7 +303,7 @@
 <RegisterUserScreen>:
     MDFloatLayout:
         #md_bg_color: 29/255, 53/255, 87/255, 1
-        md_bg_color: 1,1,1,1
+        md_bg_color: "aliceblue"
 
         MDLabel:
             text: "[b]¡Registrarse como usuario![/b]"
@@ -447,6 +447,7 @@
             mode: "outlined"
             multiline: False
             password: True
+            error_color: (1,0,0,1)
 
             size_hint_x: 0.9
             pos_hint: {'center_x': 0.5, 'center_y': 0.15}
@@ -526,7 +527,9 @@
         pos_hint: {'center_x': 0.5, 'top': 0.65}
         size_hint_x: 0.9
         size_hint_y: 0.25
-        on_release: app.work()
+        on_release:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'ManagementMedicineUserScreen'
 
         theme_shadow_color: "Custom"
         shadow_color: "blue"
@@ -582,3 +585,10 @@
 
             MDButtonIcon:
                 icon: "cog" # This didn't work yet
+
+<ManagementMedicineUserScreen>:
+    MDFloatLayout:
+        theme_bg_color: "Custom"
+        md_bg_color: self.theme_cls.backgroundColor
+
+        
