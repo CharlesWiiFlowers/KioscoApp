@@ -22,7 +22,6 @@ class MainUserScreen(Screen):
     pass
 
 class KioscoApp(MDApp):
-
     # Build the class
     sql = Sql()
 
@@ -39,7 +38,8 @@ class KioscoApp(MDApp):
 
         sm.current = 'LoginScreen'
 
-        Builder.load_file('kiosco.kv')
+        # You don't need this!
+        # Builder.load_file('kiosco.kv')
 
         #self.screen_manager = Builder.load_file('kiosco.kv')
         return sm
@@ -47,6 +47,9 @@ class KioscoApp(MDApp):
     def login(self, username, password):
         try:
             user:tuple = self.sql.login(username=username, password=password)
+            
+            global id
+            id:int = user[0]
 
             if user[1] == True:
                 self.change_screen('MainUserScreen')
