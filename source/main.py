@@ -1,6 +1,8 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
 from modules.sql_connection import Sql
 from modules.exception import LoginError
 from modules.exception import EmptyFieldError
@@ -21,6 +23,9 @@ class RegisterUserScreen(Screen):
 class MainUserScreen(Screen):
     pass
 
+class ManagementMedicineUserScreen(Screen):
+    pass
+
 class KioscoApp(MDApp):
     # Build the class
     sql = Sql()
@@ -35,6 +40,7 @@ class KioscoApp(MDApp):
         sm.add_widget(RegisterDoctorScreen(name='RegisterDoctorScreen'))
         sm.add_widget(RegisterUserScreen(name='RegisterUserScreen'))
         sm.add_widget(MainUserScreen(name='MainUserScreen'))
+        sm.add_widget(ManagementMedicineUserScreen(name='ManagementMedicineUserScreen'))
 
         sm.current = 'LoginScreen'
 
@@ -48,32 +54,35 @@ class KioscoApp(MDApp):
         try:
             user:tuple = self.sql.login(username=username, password=password)
             
-            global id
-            id:int = user[0]
-
             if user[1] == True:
                 self.change_screen('MainUserScreen')
             else:
                 self.change_screen('MainUserScreen') # TODO: change this to MainDoctorScreen
             
-        except LoginError:
-            print("Oh no!")
-        except EmptyFieldError:
-            print("Fill field")
+        except LoginError: self.snackDialog("¡Usuario o contraseña incorrectos!")
+        except EmptyFieldError: self.snackDialog("¡Por favor llena todos los campos!")
 
     def register_user(self, dui:str, name:str, phone:int, email:str, address:str, borndate:str, password:str, password_repeat:str):
         try: self.sql.register_user(dui,phone,email,address,name,password,password_repeat,borndate)
-        except EmptyFieldError:
-            print("Fill fields!")
-        except PasswordIsNotEqualError:
-            print("Password must be the same!")
+        except EmptyFieldError: self.snackDialog("¡Por favor llena todos los campos!")
+        except PasswordIsNotEqualError: self.snackDialog("¡La contraseña debe ser igual!")
 
     def register_doctor(self, dui:str, phone:int, email:str, fullname:str, vigilance:str, password:str, password_repeat:str):
         try: self.sql.register_doctor(dui,phone, email, fullname, vigilance, password, password_repeat)
-        except EmptyFieldError:
-            print("Fill fields!")
-        except PasswordIsNotEqualError:
-            print("Passowrd have to be the same!")
+        except EmptyFieldError: self.snackDialog("¡Por favor llena todos los campos!")
+        except PasswordIsNotEqualError: self.snackDialog("¡La contraseña debe ser igual!")
+
+    def snackDialog(self,text:str):
+            MDSnackbar(
+                MDSnackbarText(
+                    text=text,
+                    text_color= (0,0,0,1)
+                ),
+                y=dp(24),
+                pos_hint={"center_x": 0.5},
+                size_hint_x=0.5,
+                background_color = (1,1,1,1), # self.theme_cls.onPrimaryContainerColor
+            ).open()
 
     def work(self):
         print("Yes, this work")
