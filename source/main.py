@@ -42,7 +42,7 @@ class KioscoApp(MDApp):
         sm.add_widget(MainUserScreen(name='MainUserScreen'))
         sm.add_widget(ManagementMedicineUserScreen(name='ManagementMedicineUserScreen'))
 
-        sm.current = 'LoginScreen'
+        sm.current = 'MainUserScreen'
 
         # You don't need this!
         # Builder.load_file('kiosco.kv')
@@ -85,7 +85,8 @@ class KioscoApp(MDApp):
             ).open()
 
     def work(self):
-        print("Yes, this work")
+        self.snackDialog("Lo sentimos, esta operación no está disponible por ahora")
+        print("Hello, world, this work!!")
 
     def change_screen(self, screen):
         self.root.current = screen
