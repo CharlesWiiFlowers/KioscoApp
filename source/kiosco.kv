@@ -491,100 +491,174 @@
         theme_bg_color: "Custom"
         md_bg_color: self.theme_cls.backgroundColor
 
-    MDCard:
-        style: "elevated"
-        pos_hint: {'center_x': 0.5, 'top': 0.95}
-        size_hint_x: 0.9
-        size_hint_y: 0.25
-        on_release: app.work()
 
-        theme_shadow_color: "Custom"
-        shadow_color: "blue"
-        theme_bg_color: "Custom"
-        md_bg_color: "white"
-        md_bg_color_disabled: "grey"
-        theme_shadow_offset: "Custom"
-        shadow_offset: (1, -2)
-        theme_shadow_softness: "Custom"
-        shadow_softness: 1
-        theme_elevation_level: "Custom"
-        elevation_level: 2
+        MDLabel:
+            id: title
+            text: "Bienvenid@, [b]usuario[/b]"
+            halign: "left"
+            font_style: "Display"
+            role: "medium"
+            pos_hint: {"center_x": 0.5, "center_y": 0.8}
+            markup: True
+            font_size: "57sp"
 
+        MDExtendedFabButton:
+            id:search_kiosco
 
-        MDRelativeLayout:
-            MDLabel:
-                text: "Consultas virtuales"
-                adaptive_size: True
-                color: "black"
-                pos: "12dp", "12dp"
-                bold: True
+        MDCard:
+            id:date_management
+            style: "elevated"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            size_hint_x: 0.9
+            size_hint_y: 0.12
+            on_release: app.work()
 
-            MDButtonIcon:
-                icon: "account-injury" # This didn't work yet
+            #theme_shadow_color: "Custom"
+            #shadow_color: "blue"
+            theme_bg_color: "Custom"
+            md_bg_color: "white"
+            md_bg_color_disabled: "grey"
+            #theme_shadow_offset: "Custom"
+            #shadow_offset: (1, -2)
+            #theme_shadow_softness: "Custom"
+            #shadow_softness: 1
+            #theme_elevation_level: "Custom"
+            elevation_level: 2
 
-    MDCard:
-        style: "elevated"
-        pos_hint: {'center_x': 0.5, 'top': 0.65}
-        size_hint_x: 0.9
-        size_hint_y: 0.25
-        on_release:
-            root.manager.transition.direction = 'left'
-            root.manager.current = 'ManagementMedicineUserScreen'
+            MDRelativeLayout:
 
-        theme_shadow_color: "Custom"
-        shadow_color: "blue"
-        theme_bg_color: "Custom"
-        md_bg_color: "white"
-        md_bg_color_disabled: "grey"
-        theme_shadow_offset: "Custom"
-        shadow_offset: (1, -2)
-        theme_shadow_softness: "Custom"
-        shadow_softness: 1
-        theme_elevation_level: "Custom"
-        elevation_level: 2
+                MDIconButton:
+                    icon: "doctor"
+                    style: "filled"
+                    theme_bg_color: "Custom"
+                    md_bg_color: "cornflowerblue"
+                    size: '55dp','55dp'
+                    theme_font_size: "Custom"
+                    font_size: '32sp'
+                    pos_hint: {"center_x": 0.05, "center_y": 0.5}
 
+                MDLabel:
+                    text: "Consultas virtuales"
+                    adaptive_size: True
+                    color: "black"
+                    halign: "center"
+                    pos_hint: {'center_x': 0.22 , 'center_y': 0.5} #TODO: delete this
+                    text_color: "dimgray"
+                    bold: True
+                    theme_font_size: "Custom"
+                    font_size: '20sp'
 
-        MDRelativeLayout:
-            MDLabel:
-                text: "Gestión de medicamentos"
-                adaptive_size: True
-                color: "black"
-                pos: "12dp", "12dp"
-                bold: True
+        MDCard:
+            id:medicine
+            style: "elevated"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+            size_hint_x: 0.9
+            size_hint_y: 0.12
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'ManagementMedicineUserScreen'
 
-            MDButtonIcon:
-                icon: "pill" # This didn't work yet
-
-    MDCard:
-        style: "elevated"
-        pos_hint: {'center_x': 0.5, 'top': 0.35}
-        size_hint_x: 0.9
-        size_hint_y: 0.25
-        on_release: app.work()
-
-        theme_shadow_color: "Custom"
-        shadow_color: "blue"
-        theme_bg_color: "Custom"
-        md_bg_color: "white"
-        md_bg_color_disabled: "grey"
-        theme_shadow_offset: "Custom"
-        shadow_offset: (1, -2)
-        theme_shadow_softness: "Custom"
-        shadow_softness: 1
-        theme_elevation_level: "Custom"
-        elevation_level: 2
+            theme_bg_color: "Custom"
+            md_bg_color: "white"
+            md_bg_color_disabled: "grey"
 
 
-        MDRelativeLayout:
-            MDLabel:
-                text: "Configuración"
-                adaptive_size: True
-                color: "black"
-                pos: "12dp", "12dp"
-                bold: True
+            MDRelativeLayout:
 
-            MDButtonIcon:
-                icon: "cog" # This didn't work yet
+                MDIconButton:
+                    icon: "pill"
+                    style: "filled"
+                    theme_bg_color: "Custom"
+                    md_bg_color: "mediumpurple"
+                    theme_font_size: "Custom"
+                    font_size: '32sp'
+                    size: '55dp','55dp'
+                    pos_hint: {"center_x": 0.05, "center_y": 0.5}
+
+                MDLabel:
+                    text: "Gestión de medicamentos"
+                    adaptive_size: True
+                    color: "black"
+                    halign: "center"
+                    pos_hint: {'center_x': 0.26 , 'center_y': 0.5} #TODO: delete this
+                    text_color: "dimgray"
+                    bold: True
+                    theme_font_size: "Custom"
+                    font_size: '20sp'
+
+        MDCard:
+            id:antecedent
+            style: "elevated"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+            size_hint_x: 0.9
+            size_hint_y: 0.12
+            on_release: app.work()
+
+            theme_bg_color: "Custom"
+            md_bg_color: "white"
+            md_bg_color_disabled: "grey"
+
+
+            MDRelativeLayout:
+
+                MDIconButton:
+                    icon: "account-file-text"
+                    style: "filled"
+                    theme_bg_color: "Custom"
+                    md_bg_color: "mediumseagreen"
+                    theme_font_size: "Custom"
+                    font_size: '32sp'
+                    size: '55dp','55dp'
+                    pos_hint: {"center_x": 0.05, "center_y": 0.5}
+
+                MDLabel:
+                    text: "Antecedentes"
+                    adaptive_size: True
+                    color: "black"
+                    halign: "center"
+                    pos_hint: {'center_x': 0.26 , 'center_y': 0.5} #TODO: delete this
+                    text_color: "dimgray"
+                    bold: True
+                    theme_font_size: "Custom"
+                    font_size: '20sp'
+
+
+        MDCard:
+            id:search_kiosco
+            style: "elevated"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            size_hint_x: 0.9
+            size_hint_y: 0.12
+            on_release: app.work()
+
+            theme_bg_color: "Custom"
+            md_bg_color: "white"
+            md_bg_color_disabled: "grey"
+
+
+            MDRelativeLayout:
+
+                MDIconButton:
+                    icon: "map-search"
+                    style: "filled"
+                    theme_bg_color: "Custom"
+                    md_bg_color: "mediumvioletred"
+                    theme_font_size: "Custom"
+                    font_size: '32sp'
+                    size: '55dp','55dp'
+                    pos_hint: {"center_x": 0.05, "center_y": 0.5}
+
+                MDLabel:
+                    text: "Buscar kiosco cercano"
+                    adaptive_size: True
+                    color: "black"
+                    halign: "center"
+                    pos_hint: {'center_x': 0.26 , 'center_y': 0.5} #TODO: delete this
+                    text_color: "dimgray"
+                    bold: True
+                    theme_font_size: "Custom"
+                    font_size: '20sp'
+
 
 <ManagementMedicineUserScreen>:
     MDFloatLayout:
