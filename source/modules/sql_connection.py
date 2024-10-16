@@ -42,7 +42,7 @@ class Sql(VarSql):
             # If this find the user
             if result is not None:
                 self.close_connection()
-                return result[0]
+                return (result[0], True)
             
         for value in column_list:
             self._cursor.execute(f"SELECT ID FROM doctor WHERE {value} = %(username)s AND password = %(password)s", {'username': username, 'password': password})
@@ -50,7 +50,7 @@ class Sql(VarSql):
 
             if result is not None:
                 self.close_connection()
-                return result[0]
+                return (result[0], False)
 
         # If this don't find the user
         self.close_connection()
